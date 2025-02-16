@@ -27,21 +27,24 @@
   background: white;
   border-radius: 1rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
+  overflow-x: auto;
 }
 
 .header {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(120px, 1fr));
   gap: 1rem;
   padding: 1rem 2rem;
   background-color: #7c7ff3;
   color: white;
   font-weight: 500;
+  position: sticky;
+  left: 0;
 }
 
 .headerCell {
   font-size: 1rem;
+  white-space: nowrap;
 }
 
 .body {
@@ -51,7 +54,7 @@
 
 .row {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(120px, 1fr));
   gap: 1rem;
   padding: 1rem 2rem;
   border-bottom: 1px solid #f0f0f0;
@@ -69,6 +72,9 @@
 .cell {
   color: #666;
   font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .cell:first-child {
@@ -82,12 +88,15 @@
   align-items: center;
   margin-top: 1.5rem;
   padding: 0 0.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .pageControls {
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .pageButton {
@@ -99,6 +108,7 @@
   cursor: pointer;
   font-size: 0.875rem;
   transition: opacity 0.2s;
+  white-space: nowrap;
 }
 
 .pageButton:disabled {
@@ -113,6 +123,7 @@
 .pageInfo {
   color: #666;
   font-size: 0.875rem;
+  white-space: nowrap;
 }
 
 .select {
@@ -132,17 +143,59 @@
 }
 
 @media (max-width: 768px) {
-  .header,
-  .row {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .headerCell:nth-child(n + 4),
-  .cell:nth-child(n + 4) {
-    display: none;
-  }
-
   .wrapper {
     padding: 1rem;
+  }
+
+  .tableContainer {
+    border-radius: 0.5rem;
+  }
+
+  .header,
+  .row {
+    grid-template-columns: repeat(7, minmax(100px, 1fr));
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  .headerCell,
+  .cell {
+    font-size: 0.875rem;
+  }
+
+  .pagination {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .pageControls {
+    justify-content: center;
+  }
+
+  .select {
+    width: 100%;
+  }
+
+  .pageInfo {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 0.5rem;
+  }
+
+  .header,
+  .row {
+    grid-template-columns: repeat(7, minmax(80px, 1fr));
+    padding: 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .pageButton {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
   }
 }
